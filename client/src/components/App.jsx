@@ -41,6 +41,9 @@ class App extends React.Component {
       console.log(this.state);
 
     })
+    .catch((err) => {
+      console.log('err with add login')
+    })
 
   }
 
@@ -62,6 +65,9 @@ class App extends React.Component {
         user: username
       })
     })
+    .catch((err) => {
+      console.log('err with signup')
+    })
   }
 
   addTicker(ticker) {
@@ -78,6 +84,9 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log('response in addticker APP', response)
+    })
+    .catch((err) => {
+      console.log('err with add ticker')
     })
   }
 

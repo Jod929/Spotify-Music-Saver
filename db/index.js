@@ -50,11 +50,31 @@ module.exports = {
   },
 
   getUserTickers(username) {
-
+    return new Promise((resolve, reject) => {
+      Cryptos.find({username: username}, (err, results) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(results);
+        }
+      })
+    })
   },
 
-  addTickers(username, ticker) {
+  addTickers(username, ticker, tickerName) {
 
+    console.log('username', username, ticker)
+    ticker['name'] = tickerName;
+
+    return new Promise((resolve, reject) => {
+      Cryptos.findOneAndUpdate({username: username}, {$push : {tickers: ticker}}, (err, results) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(results);
+        }
+      })
+    })
   },
 
   deleteTicker(username, ticker) {

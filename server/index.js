@@ -33,44 +33,44 @@ app.post('/login', (req, res) => {
   let password = req.body.userInfo.loginPassword;
 
   db.validateUser(userName, password)
-  .then((data) => {
-    res.send(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+    .then((data) => {
+      let user = data[0].username;
+      return db.getUserTickers(user);
+    })
+    .then((userInfo) => {
+      res.send(userInfo)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 
 })
 
 app.put('/addTicker', (req, res) => {
 
-  let ticker = req.body.ticker.ticker;
+  let tickerName = req.body.ticker.ticker;
   let user = req.body.user;
 
-  let to = ticker.slice(0, 3);
-  let from = ticker.slice(3, 6);
+  let to = tickerName.slice(0, 3);
+  let from = tickerName.slice(3, 6);
 
   api.getData(to, from)
     .then((data) => {
       return data;
     })
     .then((ticker) => {
-      return db.addTickers(user, ticker);
+      return db.addTickers(user, ticker, tickerName)
     })
-    .then((response) => {
-      return getUserTickers(user);
+    .then((data) => {
+      return db.getUserTickers(user)
     })
-    .then((userTickers) => {
-      res.send(userTickers);
+    .then((data) => {
+      res.send(data);
+      // console.log('data from get tickers', data);
     })
     .catch((err) => {
       console.log(err);
     })
-
-  // ping the api with the ticker info
-  // get that data and insert it into the db
-  // get all the tickers for that user
-  // send the tickers back to the client
 
 })
 

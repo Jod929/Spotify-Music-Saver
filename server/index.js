@@ -21,6 +21,14 @@ app.post('/signup', (req, res) => {
 
 })
 
+app.post('/login', (req, res) => {
+
+})
+
+app.put('/addTicker', (req, res) => {
+
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

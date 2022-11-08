@@ -12,7 +12,8 @@ class Login extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
   handleChange(e) {
@@ -26,10 +27,17 @@ class Login extends React.Component {
 
   }
 
-  handleSubmit(e) {
+  handleLogin(e) {
     e.preventDefault();
 
     this.props.login(this.state);
+
+  }
+
+  handleSignUp(e) {
+    e.preventDefault();
+
+    this.props.signUp(this.state);
 
   }
 
@@ -40,7 +48,7 @@ class Login extends React.Component {
         <div>
           <h1>Login</h1>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleLogin}>
 
             <label>
               Username:
@@ -61,7 +69,7 @@ class Login extends React.Component {
         <div>
           <h1>Sign Up</h1>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSignUp}>
 
             <label>
               Username:

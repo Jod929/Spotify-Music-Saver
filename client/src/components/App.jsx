@@ -34,7 +34,20 @@ class App extends React.Component {
   }
 
   signUp(userInfo) {
-
+    console.log('user info in sign uop', userInfo)
+    axios({
+      method: 'post',
+      url: '/signup',
+      data: {
+        userInfo
+      }
+    })
+    .then((response) => {
+      console.log('response from signup', response)
+      this.setState({
+        loggedIn: true
+      })
+    })
   }
 
 

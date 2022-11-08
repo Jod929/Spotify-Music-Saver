@@ -12,9 +12,14 @@ app.use(bodyParser.json());
 
 app.post('/signup', (req, res) => {
 
-  db.insertUser('steve', '1234')
+  console.log(req.body)
+
+  let username = req.body.userInfo.signUpUsername;
+  let password = req.body.userInfo.signUpPassword;
+
+  db.insertUser(username, password)
   .then((data) => {
-    console.log(data);
+    res.send(data);
   })
   .catch((err) => {
     console.log("err", err);
@@ -22,18 +27,14 @@ app.post('/signup', (req, res) => {
 
 })
 
-// coms stuff
 
 app.post('/login', (req, res) => {
-
 
   let userName = req.body.userInfo.loginUsername;
   let password = req.body.userInfo.loginPassword;
 
-
   db.validateUser(userName, password)
   .then((data) => {
-    console.log(data);
     res.send(data);
   })
   .catch((err) => {
@@ -49,5 +50,3 @@ app.put('/addTicker', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-// test comit

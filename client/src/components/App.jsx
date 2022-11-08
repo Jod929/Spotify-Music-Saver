@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from './Login.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,35 @@ class App extends React.Component {
     this.state = {
       loggedIn: false
     }
+
+    this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
+
+  login(userInfo) {
+    axios({
+      method: 'post',
+      url: '/login',
+      data: {
+        userInfo
+      }
+    })
+    .then((response) => {
+      console.log('res in app', response.data)
+
+      if (response.data.length !== 0) {
+        this.setState({
+          loggedIn: true
+        })
+      }
+    })
+  }
+
+  signUp(userInfo) {
+
+  }
+
+
 
   render() {
 
@@ -16,7 +45,7 @@ class App extends React.Component {
       if (!this.state.loggedIn) {
         return (
           <div>
-            <Login />
+            <Login login={this.login} signUp={this.signUp}/>
           </div>
         )
       } else {

@@ -26,9 +26,15 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', (req, res) => {
 
-  db.validateUser('rob', '1234')
+
+  let userName = req.body.userInfo.loginUsername;
+  let password = req.body.userInfo.loginPassword;
+
+
+  db.validateUser(userName, password)
   .then((data) => {
     console.log(data);
+    res.send(data);
   })
   .catch((err) => {
     console.log(err);

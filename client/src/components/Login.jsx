@@ -29,9 +29,7 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    // send this to the app to be processed by the server
-
-    console.log(this.state);
+    this.props.login(this.state);
 
   }
 

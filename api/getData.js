@@ -4,11 +4,14 @@ const getData = function(to, from) {
 
   let url = `https://api.exchange.cryptomkt.com/api/3/public/ticker/${to}${from}`
 
-  fetch(url)
-    .then(data => data.json())
-    .then((res) => {
-      console.log(res);
-    })
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(data => data.json())
+      .then((res) => {
+        resolve(res);
+      })
+  })
+
 }
 
 module.exports = {

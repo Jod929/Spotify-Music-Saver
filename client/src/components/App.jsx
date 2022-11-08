@@ -11,7 +11,8 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: false,
-      user: ''
+      user: '',
+      tickers: []
     }
 
     this.login = this.login.bind(this);
@@ -77,7 +78,6 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log('response in addticker APP', response)
-
     })
   }
 

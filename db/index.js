@@ -55,5 +55,9 @@ module.exports = {
 
   addTickers(username, ticker) {
 
+  },
+
+  deleteTicker(username, ticker) {
+
   }
 }

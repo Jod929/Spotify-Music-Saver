@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const db = require('../db/index.js');
+const api = require('../api/getData.js');
 const bodyParser = require('body-parser');
 
 app.use(express.static(path.resolve('./client/src/dist')))
@@ -42,7 +43,34 @@ app.post('/login', (req, res) => {
 })
 
 app.put('/addTicker', (req, res) => {
-  console.log(req.body)
+
+  let ticker = req.body.ticker.ticker;
+  let user = req.body.user;
+
+  let to = ticker.slice(0, 3);
+  let from = ticker.slice(3, 6);
+
+  api.getData(to, from)
+    .then((data) => {
+      return data;
+    })
+    .then((ticker) => {
+      return db.addTickers(user, ticker);
+    })
+    .then((response) => {
+      return getUserTickers(user);
+    })
+    .then((userTickers) => {
+      res.send(userTickers);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+  // ping the api with the ticker info
+  // get that data and insert it into the db
+  // get all the tickers for that user
+  // send the tickers back to the client
 
 })
 

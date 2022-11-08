@@ -21,6 +21,8 @@ app.post('/signup', (req, res) => {
 
 })
 
+// coms stuff
+
 app.post('/login', (req, res) => {
 
 })

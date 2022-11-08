@@ -37,6 +37,20 @@ module.exports = {
 
   validateUser(username, password) {
 
+    return new Promise((resolve, reject) => {
+      Cryptos.find({ username: username, password: password }, (err, results) => {
+        if (err) {
+          reject(new Error(err))
+        } else {
+          resolve(results)
+        }
+      })
+    })
+
+  },
+
+  getUserTickers(username) {
+
   },
 
   addTickers(username, ticker) {

@@ -9,6 +9,7 @@ app.use(express.static(path.resolve('./client/src/dist')))
 
 app.use(bodyParser.json());
 
+
 app.post('/signup', (req, res) => {
 
   db.insertUser('steve', '1234')
@@ -24,6 +25,14 @@ app.post('/signup', (req, res) => {
 // coms stuff
 
 app.post('/login', (req, res) => {
+
+  db.validateUser('rob', '1234')
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
 })
 

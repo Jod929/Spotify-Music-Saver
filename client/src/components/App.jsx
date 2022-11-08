@@ -23,7 +23,6 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log('res in app', response.data)
 
       if (response.data.length !== 0) {
         this.setState({
@@ -43,7 +42,6 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log('response from signup', response)
       this.setState({
         loggedIn: true
       })

@@ -38,7 +38,6 @@ class Login extends React.Component {
     e.preventDefault();
 
     this.props.signUp(this.state);
-
   }
 
   render() {

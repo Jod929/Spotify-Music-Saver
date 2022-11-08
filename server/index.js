@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 
 app.post('/signup', (req, res) => {
 
-  console.log(req.body)
-
   let username = req.body.userInfo.signUpUsername;
   let password = req.body.userInfo.signUpPassword;
 

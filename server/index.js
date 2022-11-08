@@ -42,6 +42,7 @@ app.post('/login', (req, res) => {
 })
 
 app.put('/addTicker', (req, res) => {
+  console.log(req.body)
 
 })
 

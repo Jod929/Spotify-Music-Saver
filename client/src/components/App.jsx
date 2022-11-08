@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import Login from './Login.jsx';
+import AddTickers from './AddTickers.jsx';
+import Tickers from './Tickers.jsx';
 import axios from 'axios';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      user: ''
     }
 
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.addTicker = this.addTicker.bind(this);
   }
 
   login(userInfo) {
@@ -24,12 +29,18 @@ class App extends React.Component {
     })
     .then((response) => {
 
+      let username = response.data[0].username
+
       if (response.data.length !== 0) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          user: username
         })
       }
+      console.log(this.state);
+
     })
+
   }
 
   signUp(userInfo) {
@@ -42,9 +53,31 @@ class App extends React.Component {
       }
     })
     .then((response) => {
+      let username = response.data.username;
+      console.log('response', response)
+
       this.setState({
-        loggedIn: true
+        loggedIn: true,
+        user: username
       })
+    })
+  }
+
+  addTicker(ticker) {
+
+    let user = this.state.user;
+
+    axios({
+      method: 'put',
+      url: '/addTicker',
+      data: {
+        ticker,
+        user
+      }
+    })
+    .then((response) => {
+      console.log('response in addticker APP', response)
+
     })
   }
 
@@ -62,7 +95,8 @@ class App extends React.Component {
       } else {
         return (
           <div>
-            Logged In
+            <AddTickers addTicker={this.addTicker}/>
+            <Tickers />
           </div>
         )
       }

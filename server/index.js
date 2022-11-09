@@ -89,11 +89,8 @@ app.put('/deleteTicker', (req, res) => {
 
   db.deleteTicker(user, ticker)
     .then((response) => {
-      console.log('resepons test', response)
-     db.getUserTickers(user)
-        .then((data) => {
-          console.log('data aget deltet', data[0].tickers);
-        })
+      // console.log('resepons test', response)
+     return db.getUserTickers(user)
     })
     .then((tickers) => {
       res.send(tickers);

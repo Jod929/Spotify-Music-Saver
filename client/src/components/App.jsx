@@ -115,7 +115,12 @@ class App extends React.Component {
       data: tickerInfo
     })
     .then((response) => {
-      console.log('response in delete tiker', response)
+      let tickers = response.data[0].tickers;
+
+      this.setState({
+        tickers: tickers
+      })
+      // console.log('response in delete tiker', response)
     })
   }
 

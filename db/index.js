@@ -83,11 +83,12 @@ module.exports = {
     console.log('ticker', ticker);
 
     return new Promise((resolve, reject) => {
-      Cryptos.findOneAndUpdate({username: username, 'tickers.name': ticker}, {'$pull': {tickers: { name: ticker}} }, (err, results) => {
+      Cryptos.update({username: username}, {$pull: { tickers: {name: ticker }}}, (err, results) => {
         if (err) {
           reject(new Error(err));
+          // console.log(err);
         } else {
-          console.log('results from delte ,', results);
+          // console.log('results: ', results);
           resolve(results);
         }
       })

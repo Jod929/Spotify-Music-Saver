@@ -18,6 +18,7 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
     this.addTicker = this.addTicker.bind(this);
+    this.deleteTicker = this.deleteTicker.bind(this);
   }
 
   login(userInfo) {
@@ -100,6 +101,23 @@ class App extends React.Component {
     })
   }
 
+  deleteTicker(ticker) {
+
+    let user = this.state.user;
+    let tickerInfo = {
+      user,
+      ticker
+    }
+
+    axios({
+      method: 'put',
+      url: '/deleteTicker',
+      data: tickerInfo
+    })
+    .then((response) => {
+      console.log('response in delete tiker', response)
+    })
+  }
 
 
   render() {
@@ -115,7 +133,7 @@ class App extends React.Component {
         return (
           <div>
             <AddTickers addTicker={this.addTicker}/>
-            <Tickers tickers={this.state.tickers}/>
+            <Tickers tickers={this.state.tickers} delete={this.deleteTicker}/>
           </div>
         )
       }

@@ -74,6 +74,10 @@ app.put('/addTicker', (req, res) => {
 
 })
 
+app.put('/deleteTicker', (req, res) => {
+  console.log('reqBODY', req.body)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

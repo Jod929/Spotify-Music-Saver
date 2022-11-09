@@ -63,7 +63,6 @@ module.exports = {
 
   addTickers(username, ticker, tickerName) {
 
-    console.log('username', username, ticker)
     ticker['name'] = tickerName;
 
     return new Promise((resolve, reject) => {

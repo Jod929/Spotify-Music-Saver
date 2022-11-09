@@ -30,12 +30,14 @@ class App extends React.Component {
     })
     .then((response) => {
 
-      let username = response.data[0].username
+      let username = response.data[0].username;
+      let tickers = response.data[0].tickers;
 
       if (response.data.length !== 0) {
         this.setState({
           loggedIn: true,
-          user: username
+          user: username,
+          tickers: tickers
         })
       }
       console.log(this.state);
@@ -83,7 +85,12 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log('response in addticker APP', response)
+      let tickers = response.data[0].tickers;
+
+      this.setState({
+        tickers: tickers
+      })
+
     })
     .catch((err) => {
       console.log('err with add ticker')
@@ -105,7 +112,7 @@ class App extends React.Component {
         return (
           <div>
             <AddTickers addTicker={this.addTicker}/>
-            <Tickers />
+            <Tickers tickers={this.state.tickers}/>
           </div>
         )
       }

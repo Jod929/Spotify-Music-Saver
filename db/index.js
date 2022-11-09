@@ -78,5 +78,35 @@ module.exports = {
 
   deleteTicker(username, ticker) {
 
+    // { $pull: { votes: { $gte: 6 } } }
+
+    console.log('ticker', ticker);
+
+    return new Promise((resolve, reject) => {
+      Cryptos.findOneAndUpdate({username: username, 'tickers.name': ticker}, {'$pull': {tickers: { name: ticker}} }, (err, results) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          console.log('results from delte ,', results);
+          resolve(results);
+        }
+      })
+    })
+  },
+
+  find(username, ticker) {
+
+    return new Promise((resolve, reject) => {
+      Cryptos.update({username: username}, {$pull: { tickers: {name: ticker }}}, (err, results) => {
+        if (err) {
+          reject(err);
+          console.log(err);
+        } else {
+          console.log('results: ', results);
+          resolve(results);
+        }
+      })
+
+    })
   }
 }

@@ -10,6 +10,14 @@ app.use(express.static(path.resolve('./client/src/dist')))
 
 app.use(bodyParser.json());
 
+db.find('randy', 'ethbtc')
+  .then((data) => {
+    db.getUserTickers('tim')
+      .then((data) => {
+        console.log('data', data);
+      })
+  })
+
 
 app.post('/signup', (req, res) => {
 
@@ -76,6 +84,23 @@ app.put('/addTicker', (req, res) => {
 
 app.put('/deleteTicker', (req, res) => {
   console.log('reqBODY', req.body)
+  let user = req.body.user;
+  let ticker = req.body.ticker;
+
+  db.deleteTicker(user, ticker)
+    .then((response) => {
+      console.log('resepons test', response)
+     db.getUserTickers(user)
+        .then((data) => {
+          console.log('data aget deltet', data[0].tickers);
+        })
+    })
+    .then((tickers) => {
+      res.send(tickers);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 })
 
 app.listen(port, () => {

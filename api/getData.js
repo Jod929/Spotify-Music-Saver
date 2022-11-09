@@ -8,7 +8,12 @@ const getData = function(to, from) {
     fetch(url)
       .then(data => data.json())
       .then((res) => {
-        resolve(res);
+
+        if (res.error) {
+          reject(new Error(res.error))
+        } else {
+          resolve(res);
+        }
       })
   })
 

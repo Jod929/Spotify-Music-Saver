@@ -87,9 +87,12 @@ class App extends React.Component {
     .then((response) => {
       let tickers = response.data[0].tickers;
 
-      this.setState({
-        tickers: tickers
-      })
+      if (ticker.length !== 0) {
+        this.setState({
+          tickers: tickers
+        })
+      }
+
 
     })
     .catch((err) => {

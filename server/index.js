@@ -10,14 +10,6 @@ app.use(express.static(path.resolve('./client/src/dist')))
 
 app.use(bodyParser.json());
 
-db.find('randy', 'ethbtc')
-  .then((data) => {
-    db.getUserTickers('tim')
-      .then((data) => {
-        console.log('data', data);
-      })
-  })
-
 
 app.post('/signup', (req, res) => {
 
